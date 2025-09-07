@@ -1,4 +1,7 @@
-export function Footer({ onNavigate }) {
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+
+export function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
@@ -6,18 +9,18 @@ export function Footer({ onNavigate }) {
         <div>
           <div className="text-center space-y-4">
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
-              <button 
-                onClick={() => onNavigate('privacy')}
+              <Link 
+                to="/privacy"
                 className="hover:text-blue-600 transition-colors cursor-pointer"
               >
                 Privacy Policy
-              </button>
-              <button 
-                onClick={() => onNavigate('about')}
+              </Link>
+              <Link 
+                to="/about"
                 className="hover:text-blue-600 transition-colors cursor-pointer"
               >
                 About
-              </button>
+              </Link>
             </div>
             <p className="text-sm text-gray-500">
               © 2025 bestretirementcalculators.com - This tool provides estimates for educational purposes only. 

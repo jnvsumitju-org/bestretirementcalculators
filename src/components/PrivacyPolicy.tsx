@@ -1,15 +1,24 @@
+import * as React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export function PrivacyPolicy({ onNavigateHome }) {
+export function PrivacyPolicy() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Privacy Policy | Best Retirement Calculator</title>
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://bestretirementcalculators.com/privacy" />
+      </Helmet>
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Button 
             variant="ghost" 
-            onClick={onNavigateHome}
+            onClick={() => navigate('/')}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-800 p-0"
           >
             <ArrowLeft size={20} />

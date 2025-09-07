@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import * as React from 'react';
+import { useState, Suspense, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Calculator } from './components/Calculator';
-import { Results } from './components/Results';
-import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
-import { PrivacyPolicy } from './components/PrivacyPolicy';
-import { About } from './components/About';
+
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
+const About = lazy(() => import('./components/About').then(m => ({ default: m.About })));
+const FAQ = lazy(() => import('./components/FAQ').then(m => ({ default: m.FAQ })));
+const Results = lazy(() => import('./components/Results').then(m => ({ default: m.Results })));
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
   const [calculationResults, setCalculationResults] = useState(null);
 
   const handleCalculate = (results) => {
@@ -36,44 +39,46 @@ export default function App() {
     }, 100);
   };
 
-  const navigateToPage = (page) => {
-    setCurrentPage(page);
-    window.scrollTo(0, 0);
-  };
-
-  const navigateHome = () => {
-    setCurrentPage('home');
-    window.scrollTo(0, 0);
-  };
-
-  // Render different pages based on current page
-  if (currentPage === 'privacy') {
-    return <PrivacyPolicy onNavigateHome={navigateHome} />;
-  }
-
-  if (currentPage === 'about') {
-    return <About onNavigateHome={navigateHome} />;
-  }
-
-  // Home page (default)
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <Calculator onCalculate={handleCalculate} onShowFAQ={handleShowFAQ} />
-        
-        {calculationResults && (
-          <Results 
-            id="results"
-            results={calculationResults} 
+      <Helmet>
+        <title>Best Retirement Calculator | Plan Your Retirement Number</title>
+        <meta name="description" content="Free retirement calculator using the 4% rule. Estimate your retirement number, see if you're on track, and get clear charts and guidance." />
+        <meta name="keywords" content="retirement calculator, 4% rule, financial independence, retirement planning, FIRE" />
+        <link rel="canonical" href="https://bestretirementcalculators.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Best Retirement Calculator" />
+        <meta property="og:description" content="Estimate your retirement number in seconds with the 4% rule." />
+        <meta property="og:url" content="https://bestretirementcalculators.com/" />
+        <meta property="og:image" content="/og.svg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Best Retirement Calculator" />
+        <meta name="twitter:description" content="Estimate your retirement number in seconds with the 4% rule." />
+        <meta name="twitter:image" content="/og.svg" />
+      </Helmet>
+      <Suspense fallback={<div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-gray-500">Loading…</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                <Calculator onCalculate={handleCalculate} onShowFAQ={handleShowFAQ} />
+                {calculationResults && (
+                  <Suspense fallback={<div className="text-gray-500 mt-8">Loading results…</div>}>
+                    <Results id="results" results={calculationResults} />
+                  </Suspense>
+                )}
+                <div id="faq" className="py-16 border-t border-gray-100">
+                  <FAQ />
+                </div>
+              </div>
+            }
           />
-        )}
-        
-        <div id="faq" className="py-16 border-t border-gray-100">
-          <FAQ />
-        </div>
-      </div>
-      
-      <Footer onNavigate={navigateToPage} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Suspense>
+      <Footer />
     </div>
   );
 }

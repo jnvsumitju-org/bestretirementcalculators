@@ -127,7 +127,7 @@ export function Calculator({ onCalculate, onShowFAQ }) {
                 value={formData.currentAge}
                 onChange={(e) => handleInputChange('currentAge', e.target.value)}
                 min="18"
-                max="60"
+                max="100"
                 className="w-full"
                 placeholder="35"
               />

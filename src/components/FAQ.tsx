@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Card, CardContent } from './ui/card';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -37,6 +38,19 @@ export function FAQ() {
 
   return (
     <div className="space-y-6">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqItems.map((item) => ({
+              "@type": "Question",
+              "name": item.question,
+              "acceptedAnswer": { "@type": "Answer", "text": item.answer },
+            })),
+          })}
+        </script>
+      </Helmet>
       <div className="text-center space-y-2">
         <h2 className="text-3xl text-blue-900">Frequently Asked Questions</h2>
         <p className="text-gray-600">Everything you need to know about retirement planning</p>

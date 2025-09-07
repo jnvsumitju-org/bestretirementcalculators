@@ -5,6 +5,9 @@
 
   export default defineConfig({
     plugins: [react()],
+    esbuild: {
+      drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
@@ -52,6 +55,19 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      cssMinify: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: [
+              'react',
+              'react-dom',
+              'react-router-dom',
+            ],
+            charts: ['recharts@2.15.2'],
+          },
+        },
+      },
     },
     server: {
       port: 3000,

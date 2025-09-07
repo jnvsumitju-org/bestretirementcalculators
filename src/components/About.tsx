@@ -1,9 +1,13 @@
+import * as React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowLeft, Calculator, TrendingUp, Shield, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export function About({ onNavigateHome }) {
+export function About() {
+  const navigate = useNavigate();
   const features = [
     {
       icon: Calculator,
@@ -29,11 +33,16 @@ export function About({ onNavigateHome }) {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>About | Best Retirement Calculator</title>
+        <meta name="description" content="Learn about our mission, methodology, and privacy-first retirement calculator based on the 4% rule." />
+        <link rel="canonical" href="https://bestretirementcalculators.com/about" />
+      </Helmet>
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Button 
             variant="ghost" 
-            onClick={onNavigateHome}
+            onClick={() => navigate('/')}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-800 p-0"
           >
             <ArrowLeft size={20} />
