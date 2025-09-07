@@ -20,7 +20,7 @@ export function Footer({ onNavigate }) {
               </button>
             </div>
             <p className="text-sm text-gray-500">
-              © 2024 Retirement Calculator. This tool provides estimates for educational purposes only. 
+              © 2025 bestretirementcalculators.com - This tool provides estimates for educational purposes only. 
               Consult a financial advisor for personalized advice.
             </p>
           </div>

@@ -20,7 +20,7 @@ export function PrivacyPolicy({ onNavigateHome }) {
         <Card className="border-0 shadow-lg">
           <CardHeader className="text-center pb-6">
             <CardTitle className="text-3xl text-blue-900">Privacy Policy</CardTitle>
-            <p className="text-gray-600 mt-2">Last updated: December 2024</p>
+            <p className="text-gray-600 mt-2">Last updated: September 2025</p>
           </CardHeader>
           <CardContent className="prose prose-lg max-w-none p-8 space-y-6">
             <section className="space-y-4">

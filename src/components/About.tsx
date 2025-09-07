@@ -137,10 +137,10 @@ export function About({ onNavigateHome }) {
               <div className="bg-gray-50 rounded-lg p-6 inline-block">
                 <p className="text-gray-900 mb-2">Contact us at:</p>
                 <a 
-                  href="mailto:hello@retirementcalculator.com" 
+                  href="mailto:hello@bestretirementcalculators.com" 
                   className="text-blue-600 hover:text-blue-800 transition-colors"
                 >
-                  hello@retirementcalculator.com
+                  hello@bestretirementcalculators.com
                 </a>
               </div>
             </CardContent>
