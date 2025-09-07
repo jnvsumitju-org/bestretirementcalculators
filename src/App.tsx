@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Calculator } from './components/Calculator';
 import { Footer } from './components/Footer';
@@ -77,6 +77,7 @@ export default function App() {
             />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/about" element={<About />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
       </main>
