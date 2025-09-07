@@ -40,7 +40,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col">
       <Helmet>
         <title>Best Retirement Calculator | Plan Your Retirement Number</title>
         <meta name="description" content="Free retirement calculator using the 4% rule. Estimate your retirement number, see if you're on track, and get clear charts and guidance." />
@@ -56,28 +56,30 @@ export default function App() {
         <meta name="twitter:description" content="Estimate your retirement number in seconds with the 4% rule." />
         <meta name="twitter:image" content="/og.svg" />
       </Helmet>
-      <Suspense fallback={<div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-gray-500">Loading…</div>}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-                <Calculator onCalculate={handleCalculate} onShowFAQ={handleShowFAQ} />
-                {calculationResults && (
-                  <Suspense fallback={<div className="text-gray-500 mt-8">Loading results…</div>}>
-                    <Results id="results" results={calculationResults} />
-                  </Suspense>
-                )}
-                <div id="faq" className="py-16 border-t border-gray-100">
-                  <FAQ />
+      <main className="flex-1">
+        <Suspense fallback={<div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-gray-500">Loading…</div>}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                  <Calculator onCalculate={handleCalculate} onShowFAQ={handleShowFAQ} />
+                  {calculationResults && (
+                    <Suspense fallback={<div className="text-gray-500 mt-8">Loading results…</div>}>
+                      <Results id="results" results={calculationResults} />
+                    </Suspense>
+                  )}
+                  <div id="faq" className="py-16 border-t border-gray-100">
+                    <FAQ />
+                  </div>
                 </div>
-              </div>
-            }
-          />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </Suspense>
+              }
+            />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </Suspense>
+      </main>
       <Footer />
     </div>
   );

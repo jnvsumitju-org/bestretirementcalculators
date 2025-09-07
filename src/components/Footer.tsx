@@ -2,6 +2,12 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export function Footer() {
+  const prefetchAbout = React.useCallback(() => {
+    import('./About');
+  }, []);
+  const prefetchPrivacy = React.useCallback(() => {
+    import('./PrivacyPolicy');
+  }, []);
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
@@ -11,12 +17,14 @@ export function Footer() {
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
               <Link 
                 to="/privacy"
+                onMouseEnter={prefetchPrivacy}
                 className="hover:text-blue-600 transition-colors cursor-pointer"
               >
                 Privacy Policy
               </Link>
               <Link 
                 to="/about"
+                onMouseEnter={prefetchAbout}
                 className="hover:text-blue-600 transition-colors cursor-pointer"
               >
                 About
